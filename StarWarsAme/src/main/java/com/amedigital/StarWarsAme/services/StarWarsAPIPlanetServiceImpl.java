@@ -34,6 +34,29 @@ public class StarWarsAPIPlanetServiceImpl implements StarWarsAPIPlanetService {
 	    return swapi;
 	
 	}
+	
+	@Override
+	public boolean getPlanetFromAPIExists(String name) {
+		
+		RestTemplate restTemplate = new RestTemplate();
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+	    headers.add("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0");
+	    HttpEntity<?> entity = new HttpEntity<>(headers);
+
+	    HttpEntity<StarWarsAPI> response = restTemplate.exchange(this.URI + name, HttpMethod.GET, entity, StarWarsAPI.class);
+	    
+	    StarWarsAPI swapi = response.getBody();
+	    
+	    if(swapi.getCount() > 0) {
+	    	return true;
+	    }else {
+	    	return false;
+	    }
+	
+	}
+	
+	
 
 	@Override
 	public List<StarWarsAPIPlanet> listAllPlanet() {

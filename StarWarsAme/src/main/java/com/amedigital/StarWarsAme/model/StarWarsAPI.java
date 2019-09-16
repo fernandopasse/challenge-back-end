@@ -14,5 +14,10 @@ public class StarWarsAPI {
 	public List<StarWarsAPIPlanet> getResults() {
 		return results;
 	}
-  
+
+	public Integer getCount() {
+		return count;
+	}
+	
+	
 }

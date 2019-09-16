@@ -9,6 +9,8 @@ public interface StarWarsAPIPlanetService {
 
 	StarWarsAPI getPlanetFromAPI(String name);
 	
+	boolean getPlanetFromAPIExists(String name);
+	
 	List<StarWarsAPIPlanet> listAllPlanet();
 	
 }

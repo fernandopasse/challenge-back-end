@@ -60,10 +60,12 @@ public class PlanetController {
 	public ResponseEntity<Planet> savePlanet(@RequestBody Planet planet) {
 		if(ps.existsPlanet(planet.getName()))
 			return ResponseEntity.badRequest().build();
-		else {
+		else if(sws.getPlanetFromAPIExists(planet.getName())){
 			Integer numberFilms = ps.numberFilms(planet.getName());
 			planet.setTotalFilms(numberFilms);
 			return ResponseEntity.status(HttpStatus.CREATED).body(ps.save(planet));
+		}else {
+			return ResponseEntity.badRequest().build();
 		}
 	}
 	
